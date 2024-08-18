@@ -31,7 +31,9 @@ const TasksPage = () => {
               <strong>{date}</strong>
               <ul>
                 {tasks.map((task, index) => (
-                  <li key={index}>{task}</li>
+                 <li key={index} className="bg-gray-100 rounded-lg p-2 shadow mb-2">
+                 {task}
+             </li>
                 ))}
               </ul>
             </li>
