@@ -5,6 +5,20 @@ import { useRecoilState } from 'recoil';
 import { tasksState } from '../recoilState';
 import { useTasks } from '@/api';
 
+const assignTasksToJune = (tasks:any) => {
+  const julyTasks:any = {};
+  tasks.forEach((task:any, index:number) => {
+    const day = (index % 30) + 1; 
+    const date = `2024-08-${String(day).padStart(2, '0')}`;
+    if (!julyTasks[date]) {
+      julyTasks[date] = [];
+    }
+    julyTasks[date].push(task.title);
+  });
+  console.log({julyTasks})
+  return julyTasks;
+};
+
 const CalendarPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -24,10 +38,14 @@ const CalendarPage = () => {
 
   const handleOk = () => {
     if (selectedDate && task) {
-      setTasks((prev) => ({
-        ...prev,
-        [selectedDate]: [...(prev[selectedDate] || []), task],
-      }));
+      setTasks((prev) => {
+        const newTasks = {
+          ...prev,
+          [selectedDate]: [...(prev[selectedDate] || []), task],
+        };
+        localStorage.setItem('tasks', JSON.stringify(newTasks));
+        return newTasks;
+      });
       setTask('');
       setIsModalOpen(false);
     }
@@ -50,7 +68,9 @@ const CalendarPage = () => {
 
   useEffect(() => {
     if (fetchedTasks && !isLoading) {
-      setTasks(fetchedTasks);
+      const storedTasks = JSON.parse(localStorage.getItem('tasks') || '{}');
+      const combinedTasks = { ...assignTasksToJune(fetchedTasks), ...storedTasks };
+      setTasks(combinedTasks);
     }
   }, [fetchedTasks, isLoading, setTasks]);
 

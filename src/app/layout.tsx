@@ -4,8 +4,11 @@ import { RecoilRoot } from "recoil";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const inter = Inter({ subsets: ["latin"] });
+const queryClient = new QueryClient();
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,7 +18,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Link href="/calendar" className="text-blue-500 hover:text-blue-700 font-semibold">Calendar</Link>
           <Link href="/tasks" className="text-blue-500 hover:text-blue-700 font-semibold">Tasks</Link>
         </nav>
-        <RecoilRoot>{children}</RecoilRoot>
+        <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
+          </RecoilRoot>
       </body>
     </html>
   );
