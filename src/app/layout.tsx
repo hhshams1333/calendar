@@ -19,10 +19,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Link href="/tasks" className="text-blue-500 hover:text-blue-700 font-semibold">Tasks</Link>
         </nav>
         <RecoilRoot>
-        <QueryClientProvider client={queryClient}>
+          <QueryClientProvider client={queryClient}>
             {children}
           </QueryClientProvider>
-          </RecoilRoot>
+        </RecoilRoot>
       </body>
     </html>
   );

@@ -5,17 +5,18 @@ import { useRecoilState } from 'recoil';
 import { tasksState } from '../recoilState';
 import { useTasks } from '@/api';
 
-const assignTasksToJune = (tasks:any) => {
-  const julyTasks:any = {};
-  tasks.forEach((task:any, index:number) => {
-    const day = (index % 30) + 1; 
-    const date = `2024-08-${String(day).padStart(2, '0')}`;
+const assignTasksToDays = (tasks: any) => {
+  const julyTasks: any = {};
+  tasks.forEach((task: any, index: number) => {
+    const day = (index % 30) + 1;
+    const currentMonth = String(new Date().getMonth() + 1).padStart(2, '0'); // ماه جاری
+    const date = `2024-${currentMonth}-${String(day).padStart(2, '0')}`;
     if (!julyTasks[date]) {
       julyTasks[date] = [];
     }
     julyTasks[date].push(task.title);
   });
-  console.log({julyTasks})
+  console.log({ julyTasks });
   return julyTasks;
 };
 
@@ -27,10 +28,9 @@ const CalendarPage = () => {
   const { data: fetchedTasks, isLoading } = useTasks(); // Fetching tasks with React Query
 
   const inputRef = useRef<InputRef>(null);
- 
 
-  const onSelectDate = (value:any , {source}:{source:any}) => {
-    if (value && value.isValid() && value.date() !== null && source === 'date') { 
+  const onSelectDate = (value: any, { source }: { source: any }) => {
+    if (value && value.isValid() && value.date() !== null && source === 'date') {
       setSelectedDate(value.format('YYYY-MM-DD'));
       setIsModalOpen(true);
     }
@@ -69,12 +69,10 @@ const CalendarPage = () => {
   useEffect(() => {
     if (fetchedTasks && !isLoading) {
       const storedTasks = JSON.parse(localStorage.getItem('tasks') || '{}');
-      const combinedTasks = { ...assignTasksToJune(fetchedTasks), ...storedTasks };
+      const combinedTasks = { ...assignTasksToDays(fetchedTasks), ...storedTasks };
       setTasks(combinedTasks);
     }
   }, [fetchedTasks, isLoading, setTasks]);
-
-
 
   useEffect(() => {
     if (isModalOpen) {
@@ -102,14 +100,17 @@ const CalendarPage = () => {
     };
   }, [isModalOpen, task, selectedDate]);
 
-  
-
-
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">June Calendar</h1>
-      <div className="rounded-lg border p-4 shadow-lg">
-        <Calendar  onSelect={onSelectDate} dateCellRender={dateCellRender}/>
+    <div className="container mx-auto p-4 max-h-screen overflow-hidden">
+      <h1 className="text-2xl font-bold mb-4">Calendar</h1>
+      <div className="rounded-lg border p-4 shadow-lg max-h-[90vh] overflow-hidden">
+        <div className="transform scale-[0.9] origin-top-left w-[111%]">
+          <Calendar
+            className="max-h-[70vh] overflow-hidden"
+            onSelect={onSelectDate}
+            dateCellRender={dateCellRender}
+          />
+        </div>
       </div>
       <Modal
         title={`Add Task for ${selectedDate}`}
