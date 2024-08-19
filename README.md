@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Calendar App
 
-First, run the development server:
+## Overview
+This project is a simple calendar application built with Next.js 14 using the App Router (folder-based structure). The application allows users to interact with a calendar for a specific month. Users can create tasks for each day by clicking on the corresponding date and entering a task description. Additionally, there is a second page displaying an updated list of tasks for each day of the month.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+- **Next.js 14 with TypeScript**: The project is built using the latest version of Next.js, taking advantage of the App Router for organizing the application.
+- **AntDesign**: For UI components and styling, AntDesign is used to provide a professional and polished look.
+- **Tailwind CSS**: Tailwind is used alongside AntDesign for utility-first CSS styling, enabling rapid UI development.
+- **React-Query**: This library is used for data fetching and synchronization, particularly for retrieving a list of default tasks.
+- **Recoil**: Recoil is implemented as the state manager to maintain and share state between the two pages of the application.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Calendar Page
+- **Description**: Displays a calendar for the selected month. Users can click on any day to add tasks. Tasks are displayed on the respective days.
+- **Functionality**: Clicking on a day opens a modal where the user can enter task details. Tasks are saved using Recoil and displayed in the calendar grid.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 2. Task List Page
+- **Description**: Displays a list of all tasks organized by the day they are assigned to.
+- **Functionality**: The page retrieves the tasks stored in Recoil and displays them in a list format for easy viewing.
 
-## Learn More
+## Installation and Setup
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/hhshams1333/calendar.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd calendar
+    ```
+3. Install dependencies:
+    ```bash
+    npm install
+    ```
+4. Run the development server:
+    ```bash
+    npm run dev
+    ```
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
+- **Adding Tasks**: Click on any date in the calendar to add a task.
+- **Viewing Tasks**: Navigate to the tasks page to see a list of tasks for the month.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technologies Used
+- **Next.js 14**
+- **TypeScript**
+- **AntDesign**
+- **Tailwind CSS**
+- **React-Query**
+- **Recoil**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Notes
+- The application uses React-Query to fetch a list of default tasks and display them on the calendar.
+- Recoil is used for state management to ensure that state is preserved and shared between the calendar page and the task list page.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+This project is licensed under the MIT License.
