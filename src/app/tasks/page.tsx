@@ -9,9 +9,11 @@ const TasksPage = () => {
   const tasks = useRecoilValue(tasksState);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredTasks = Object.entries(tasks).filter(([date, tasks]) =>
-    tasks.some(task => task.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  const filteredTasks = Object.entries(tasks)
+    .filter(([date, tasks]) =>
+      tasks.some(task => task.toLowerCase().includes(searchTerm.toLowerCase()))
+    )
+    .sort(([dateA], [dateB]) => new Date(dateA).getTime() - new Date(dateB).getTime());
 
   return (
     <div className="container mx-auto p-4">
@@ -31,9 +33,9 @@ const TasksPage = () => {
               <strong>{date}</strong>
               <ul>
                 {tasks.map((task, index) => (
-                 <li key={index} className="bg-gray-100 rounded-lg p-2 shadow mb-2">
-                 {task}
-             </li>
+                  <li key={index} className="bg-gray-100 rounded-lg p-2 shadow mb-2">
+                    {task}
+                  </li>
                 ))}
               </ul>
             </li>
