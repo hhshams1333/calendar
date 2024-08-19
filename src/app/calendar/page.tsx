@@ -9,14 +9,13 @@ const assignTasksToDays = (tasks: any) => {
   const julyTasks: any = {};
   tasks.forEach((task: any, index: number) => {
     const day = (index % 30) + 1;
-    const currentMonth = String(new Date().getMonth() + 1).padStart(2, '0'); // ماه جاری
+    const currentMonth = String(new Date().getMonth() + 1).padStart(2, '0'); 
     const date = `2024-${currentMonth}-${String(day).padStart(2, '0')}`;
     if (!julyTasks[date]) {
       julyTasks[date] = [];
     }
     julyTasks[date].push(task.title);
   });
-  console.log({ julyTasks });
   return julyTasks;
 };
 

@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={inter.className}>
         <nav className="p-4 bg-gray-200 flex space-x-4">
-          <Link href="/calendar" className="text-blue-500 hover:text-blue-700 font-semibold">Calendar</Link>
+          <Link href="/" className="text-blue-500 hover:text-blue-700 font-semibold">Calendar</Link>
           <Link href="/tasks" className="text-blue-500 hover:text-blue-700 font-semibold">Tasks</Link>
         </nav>
         <RecoilRoot>
