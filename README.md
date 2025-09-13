@@ -4,6 +4,16 @@
 ## Overview
 This project is a simple calendar application built with Next.js 14 using the App Router (folder-based structure). The application allows users to interact with a calendar for a specific month. Users can create tasks for each day by clicking on the corresponding date and entering a task description. Additionally, there is a second page displaying an updated list of tasks for each day of the month.
 
+## Preview
+
+<p align="center">
+  <img src="public/preview/tasks.png" alt="Task List page preview" width="900" />
+</p>
+
+<p align="center">
+  <img src="public/preview/calendar.png" alt="Calendar page preview" width="900" />
+</p>
+
 ## Features
 - **Next.js 14 with TypeScript**: The project is built using the latest version of Next.js, taking advantage of the App Router for organizing the application.
 - **AntDesign**: For UI components and styling, AntDesign is used to provide a professional and polished look.
